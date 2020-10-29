@@ -1,30 +1,41 @@
 import React, { useState } from "react";
-import {Text, Image, View, TouchableOpacity, Modal, StyleSheet, SafeAreaView} from "react-native";
-
+import {Text, Image, View, TouchableOpacity, Modal, StyleSheet, SafeAreaView, FlatList} from "react-native";
+import DATA from "../utils/Data";
 import Header from "../components/Header"
+
+
 
 const Tabs = () => {
     return (
         <View>
             <Text>Hello world</Text>
-            <BlockButton />
+            <BlockButton /> 
+               
         </View>
     )
 }
 
 export default Tabs
 
+const renderItem = ({ item }) => (
+    <Item title={item.title} />
+  );
 
 
-const BlockButton = () => (
-    <View>
+const BlockButton = ({title}) => (
+    <SafeAreaView>
         <TouchableOpacity style={styles.blockButton}>
-           
-        <Header style={styles.blockButtonHeader}>Title of Block</Header>
-        <Text>Subcontext of Article</Text> 
-        <Image source={require("../Images/merlin_176296023_bfed9d37-c878-499f-bb93-83daba8c2455-thumbStandard.jpg")}></Image>
+       <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        />
+        <Header 
+         style={styles.blockButtonHeader}>{title}</Header>
+        {/* <Text>Subcontext of Article</Text> 
+        <Image source={require("../Images/merlin_176296023_bfed9d37-c878-499f-bb93-83daba8c2455-thumbStandard.jpg")}></Image> */}
         </TouchableOpacity>
-    </View>
+    </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
@@ -33,7 +44,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     blockButtonHeader: {
+        backgroundColor: "#000",
         alignItems: "center",
         justifyContent: "center",
     
-    }})
+}})

@@ -10,6 +10,7 @@ import {
   Modal,
   textAlign, 
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
@@ -25,13 +26,13 @@ setModalVisible(!modalVisible);
 
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/icon.png")}
-      style={{width: 150, height: 150}} 
+      <Image source={require("../assets/icon_copy.png")}
+      style={styles.Icon} 
       />
       <TouchableOpacity
       style={styles.apple_button}
       >
-        <Text style={styles.apple_button_text}>
+        <Text  style={styles.apple_button_text}>
          Sign in with Apple
         </Text>
       </TouchableOpacity>
@@ -43,13 +44,19 @@ setModalVisible(!modalVisible);
       transparent={false}
       visible={modalVisible}
       >
-        <View style={{ backgroundColor: "#000" }}>
-          <Text>This is our Modal.</Text>
+        <SafeAreaView style={{ backgroundColor: "#ccc" }}>
+          <TextInput 
+          clearTextOnFocus={true} 
+          style={{
+            color: "#FFF", 
+            borderColor: "#FFF", 
+            borderWidth: 1,}}>Email</TextInput>
+          <TextInput clearTextOnFocus={true} style={{color: "#FFF", borderColor: "#FFF", borderWidth: 1,}}>Password</TextInput>
           <Button
           title="Close"
           onPress={handleShowModal}
           />
-        </View>
+        </SafeAreaView>
       </Modal>
       <StatusBar style="auto" />
     </View>
@@ -68,13 +75,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 15,
-    marginTop: 15,
     marginBottom: 10,
   },
   apple_button_text:{
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
+    textAlign: "center",
+  },
+  Icon: {
+    paddingHorizontal: 75,
+    paddingVertical: 75,
+    marginTop: 15,
+    marginBottom: 10,
+    marginHorizontal: "29%"
   }
 });
 
