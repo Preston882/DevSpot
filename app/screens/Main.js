@@ -5,7 +5,12 @@ import BlockButton from "../components/BlockButton";
 
 const Tabs = () => {
   const renderItem = ({ item }) => (
-    <BlockButton title={item.title} body={item.body} image={item.image} />
+    <BlockButton
+      title={item.title}
+      body={item.body}
+      image={item.image}
+      trending={item.trending}
+    />
   );
   return (
     <SafeAreaView>
