@@ -13,7 +13,7 @@ const Picture = ({ image }) => (
 
 //page.navigate({ "page" })
 
-const BlockButton = ({ title, body, image, trending, page }) => {
+const BlockButton = ({ title, subbody, image, trending, page }) => {
   console.log(trending);
   return (
     <View style={styles.margin}>
@@ -23,7 +23,7 @@ const BlockButton = ({ title, body, image, trending, page }) => {
           <Header>{title}</Header>
           <Picture image={image} />
         </View>
-        <Text style={styles.Touchable}>{body}</Text>
+        <Text style={styles.Touchable}>{subbody}</Text>
       </TouchableOpacity>
     </View>
   );

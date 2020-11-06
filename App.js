@@ -2,14 +2,19 @@ import React from "react";
 import List from "./app/screens/List.js";
 import Login from "./app/screens/Login";
 import Main from "./app/screens/Main";
+import Page from "./app/screens/Page";
 // import createDrawerNavigator from "@react-navigation/drawer";
 // import { NavigationContainer } from './node_modules/@react-navigation/native';
 // import { Button, View } from "react-native";
 
 // const Drawer = createDrawerNavigator()
 
-
-export default () => <Main />;
+export default () => (
+  <Page
+    title="Page"
+    body="DID U KNOW THAT A LONG TIME AGO THERE ONCE WAS A YOUNG HOT WING HE WAS A VERY NICE HOT WING EXCEPT HE WANTED TO HE TOMATO'S NOT JUST NORMAL TAMATO'S BUT TOMATO'S FROM A..."
+  />
+);
 // export const TabBar = () => {
 //     <View>
 // <Button>Button</Button>
