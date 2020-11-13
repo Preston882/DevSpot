@@ -1,61 +1,58 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
-  Input,
   Image,
   StyleSheet,
   TextInput,
   Button,
   Modal,
-  textAlign, 
+  textAlign,
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
+const Login = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
 
-const Login = () => {
-  const [
-    modalVisible,
-    setModalVisible,
-  ] = useState(false);
-
-const handleShowModal = () =>
-setModalVisible(!modalVisible);
+  const handleShowModal = () => setModalVisible(!modalVisible);
 
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/icon_copy.png")}
-      style={styles.Icon} 
-      />
+      <Image source={require("../assets/icon_copy.png")} style={styles.Icon} />
       <TouchableOpacity
-      style={styles.apple_button}
+        style={styles.apple_button}
+        onPress={() => navigation.navigate("Main")}
       >
-        <Text  style={styles.apple_button_text}>
-         Sign in with Apple
+        <Text
+          onPress={() => navigation.navigate("Main")}
+          style={styles.apple_button_text}
+        >
+           Sign in with Apple
         </Text>
       </TouchableOpacity>
-      <Button title="Sign in with Email"
-      onPress={handleShowModal}
-      />
+      <Button title="Sign in with Email" onPress={handleShowModal} />
       <Button title="Forgot Passowrd" />
-      <Modal
-      transparent={false}
-      visible={modalVisible}
-      >
+      <Modal transparent={false} visible={modalVisible}>
         <SafeAreaView style={{ backgroundColor: "#ccc" }}>
-          <TextInput 
-          clearTextOnFocus={true} 
-          style={{
-            color: "#FFF", 
-            borderColor: "#FFF", 
-            borderWidth: 1,}}>Email</TextInput>
-          <TextInput clearTextOnFocus={true} style={{color: "#FFF", borderColor: "#FFF", borderWidth: 1,}}>Password</TextInput>
-          <Button
-          title="Close"
-          onPress={handleShowModal}
-          />
+          <TextInput
+            clearTextOnFocus={true}
+            style={{
+              color: "#FFF",
+              borderColor: "#FFF",
+              borderWidth: 1,
+            }}
+          >
+            Email
+          </TextInput>
+          <TextInput
+            clearTextOnFocus={true}
+            style={{ color: "#FFF", borderColor: "#FFF", borderWidth: 1 }}
+          >
+            Password
+          </TextInput>
+          <Button title="Close" onPress={handleShowModal} />
         </SafeAreaView>
       </Modal>
       <StatusBar style="auto" />
@@ -77,7 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 10,
   },
-  apple_button_text:{
+  apple_button_text: {
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
@@ -88,8 +85,8 @@ const styles = StyleSheet.create({
     paddingVertical: 75,
     marginTop: 15,
     marginBottom: 10,
-    marginHorizontal: "29%"
-  }
+    marginHorizontal: "29%",
+  },
 });
 
 export default Login;

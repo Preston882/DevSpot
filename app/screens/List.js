@@ -1,19 +1,16 @@
 import React from "react";
 import {
-  Text,
   SafeAreaView,
   StyleSheet,
-  View,
   FlatList,
   TouchableOpacity,
 } from "react-native";
 import ListItem from "../components/ListItem";
 import { DATA } from "../utils/Data";
-// import TabBar from "../../App.js"
 
-export default () => {
+export default ({ route }) => {
   const renderListItem = ({ item }) => (
-    <ListItem title={item.title} body={item.body} page={item.page} />
+    <ListItem title={item.title} subbody={item.subbody} route={route} />
   );
 
   return (

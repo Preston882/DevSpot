@@ -1,28 +1,22 @@
 import React from "react";
-import List from "./app/screens/List.js";
+import { NavigationContainer } from "./node_modules/@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import Tabs from "./app/screens/Main";
+import BlockButton from "./app/components/BlockButton.js";
 import Login from "./app/screens/Login";
 import Main from "./app/screens/Main";
 import Page from "./app/screens/Page";
-// import createDrawerNavigator from "@react-navigation/drawer";
-// import { NavigationContainer } from './node_modules/@react-navigation/native';
-// import { Button, View } from "react-native";
 
-// const Drawer = createDrawerNavigator()
+const Stack = createStackNavigator();
 
-export default () => (
-  <Page
-    title="Page"
-    body="DID U KNOW THAT A LONG TIME AGO THERE ONCE WAS A YOUNG HOT WING HE WAS A VERY NICE HOT WING EXCEPT HE WANTED TO HE TOMATO'S NOT JUST NORMAL TAMATO'S BUT TOMATO'S FROM A..."
-  />
+export default (title, subbody) => (
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Main" component={Tabs} />
+      <Stack.Screen name="List" component={BlockButton} />
+      <Stack.Screen name="Page" component={Page} />
+    </Stack.Navigator>
+  </NavigationContainer>
 );
-// export const TabBar = () => {
-//     <View>
-// <Button>Button</Button>
-// </View>
-// }
-
-// <NavigationContainer>
-// <Drawer.Navigator initialRouteName="Main">
-//     <Drawer.Screen name="Main" component={Main} />
-//   </Drawer.Navigator>
-// </NavigationContainer>

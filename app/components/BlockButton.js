@@ -11,13 +11,11 @@ const Picture = ({ image }) => (
   />
 );
 
-//page.navigate({ "page" })
-
-const BlockButton = ({ title, subbody, image, trending, page }) => {
+const BlockButton = ({ id, title, subbody, image, trending, navigation }) => {
   console.log(trending);
   return (
     <View style={styles.margin}>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => navigation.navigate("Page", { id: id })}>
         <View style={styles.blockButtonHeader}>
           <Text style={styles.trending}>{trending ? "Trending🔥" : " "}</Text>
           <Header>{title}</Header>
