@@ -1,5 +1,12 @@
-import React from "react";
-import { ScrollView, Text, StyleSheet, Image, View } from "react-native";
+import React, { useState, useRef } from "react";
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  Image,
+  View,
+  FlatList,
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import Header from "../components/Header";
 import DATA from "../utils/Data";
@@ -19,25 +26,49 @@ function Page({ route }) {
   );
   const Title2 = ({}) => <Header>{item.title}</Header>;
   const item = DATA.find((item) => item.id === route.params.id);
+  const [comments, setComments] = useState(["stuffe", "aklsjdf"]);
   return (
-    <View>
-      <ScrollView>
+    <View style={{ flex: 1 }}>
+      <ScrollView style={{ height: "50%" }}>
         <Text style={{ textAlign: "center" }}>
           {item.trending ? <Title1 /> : <Title2 />}
         </Text>
         <Picture image={item.image} />
         <Text style={{ textAlign: "center", padding: 10 }}>{item.body}</Text>
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-          }}
-          placeholderTextColor="gray"
-          clearTextOnFocus={true}
-          placeholder="Comment"
-        />
+
+        {/* <Text>
+          {comments.map((comment) => comment)}
+        </Text> */}
       </ScrollView>
+      <TextInput
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 1,
+        }}
+        placeholderTextColor="gray"
+        clearTextOnFocus={true}
+        placeholder="Comment"
+        onSubmitEditing={(event) => {
+          let newComment = event.nativeEvent.text;
+          let oldComments = comments;
+          let newComments = [...oldComments, newComment];
+          setComments(newComments);
+        }}
+      />
+      <View>
+        <FlatList
+          data={comments}
+          renderItem={({ item }) => (
+            <View>
+              <Text style={{ backgroundColor: "#ff0", color: "#000" }}>
+                {item}
+              </Text>
+            </View>
+          )}
+          keyExtractor={(index) => index}
+        />
+      </View>
     </View>
   );
 }
