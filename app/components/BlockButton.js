@@ -2,7 +2,7 @@ import React from "react";
 import { Text, Image, View, TouchableOpacity, StyleSheet } from "react-native";
 import Header from "../components/Header";
 
-const Picture = ({ image }) => (
+export const Picture = ({ image }) => (
   <Image
     style={styles.tinyLogo}
     source={{
@@ -11,8 +11,15 @@ const Picture = ({ image }) => (
   />
 );
 
-const BlockButton = ({ id, title, subbody, image, trending, navigation }) => {
-  console.log(trending);
+const BlockButton = ({
+  id,
+  title,
+  subbody,
+  image,
+  trending,
+  navigation,
+  route,
+}) => {
   return (
     <View style={styles.margin}>
       <TouchableOpacity onPress={() => navigation.navigate("Page", { id: id })}>

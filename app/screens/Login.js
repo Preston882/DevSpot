@@ -7,7 +7,6 @@ import {
   TextInput,
   Button,
   Modal,
-  textAlign,
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";

@@ -3,8 +3,10 @@ import { SafeAreaView, FlatList } from "react-native";
 import DATA from "../utils/Data";
 import BlockButton from "../components/BlockButton";
 
-const Tabs = ({ navigation, route }) => {
-  const renderItem = ({ item, id }) => (
+const sortedData = DATA.sort((a, b) => b.trending - a.trending);
+
+const Tabs = ({ navigation }) => {
+  const renderItem = ({ item }) => (
     <BlockButton
       id={item.id}
       title={item.title}
@@ -17,7 +19,7 @@ const Tabs = ({ navigation, route }) => {
   return (
     <SafeAreaView>
       <FlatList
-        data={DATA}
+        data={sortedData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
