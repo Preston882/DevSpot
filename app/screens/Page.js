@@ -61,7 +61,7 @@ function Page({ route }) {
           data={comments}
           renderItem={({ item }) => (
             <View>
-              <Text style={{ backgroundColor: "#ff0", color: "#000" }}>
+              <Text style={{color: "#000" }}>
                 {item}
               </Text>
             </View>

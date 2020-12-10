@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Text,
   View,
@@ -11,15 +11,39 @@ import {
   SafeAreaView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { onChange } from "react-native-reanimated";
+
 
 const Login = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isLoggedIn, setLogin] = useState(false);
+  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState("")
 
   const handleShowModal = () => setModalVisible(!modalVisible);
 
+  // const handleUserLogin = () => {
+  //   // if (password === "") setLogin(true)
+    
+  // };
+  const [inputValues, setInputValues] = useState({
+    username: null, password: null
+  });
+  const handleOnChange = event => {
+    const { name, value } = event.target;
+    setInputValues({[name]: value});
+    if (value === '') setLogin(true)
+   
+    isLoggedIn ? navigation.navigate("Main") :alert('Warning!') 
+    isLoggedIn && handleShowModal()
+  };  
+  
+
+
   return (
+    
     <View style={styles.container}>
-      <Image source={require("../assets/icon_copy.png")} style={styles.Icon} />
+      <Image source={require("../assets/icon.png")} style={styles.Icon} />
       <TouchableOpacity
         style={styles.apple_button}
         onPress={() => navigation.navigate("Main")}
@@ -33,25 +57,58 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
       <Button title="Sign in with Email" onPress={handleShowModal} />
       <Button title="Forgot Passowrd" />
-      <Modal transparent={false} visible={modalVisible}>
-        <SafeAreaView style={{ backgroundColor: "#ccc" }}>
+      <Modal transparent={true} visible={modalVisible} animationType='slide'>
+        <SafeAreaView style={{ backgroundColor: "#ccc", 
+        height: "50%", 
+        opacity: 0.8, 
+        marginTop: "50%", 
+        width: "95%", 
+        alignSelf: "center", 
+        borderRadius: 32}}>
+        <View>
+          <TouchableOpacity onPress={handleShowModal} style={{color: "#000"}}>
+            <Text style={{fontWeight: "bold", 
+            fontSize: 30, 
+            alignSelf: "flex-end", 
+            marginRight: 20, 
+            marginTop: 20, 
+            position: "relative"}}>X</Text>
+          </TouchableOpacity>
+        </View>
+          <View style={{justifyContent: "flex-start", 
+          flex: 1, 
+          marginTop: 70, 
+          marginHorizontal: 20}}>
           <TextInput
             clearTextOnFocus={true}
             style={{
-              color: "#FFF",
-              borderColor: "#FFF",
-              borderWidth: 1,
+              color: "#000",
+              borderColor: "#000",
+              borderWidth: 2,
+              opacity: 1,
+              padding: 10,
+              marginVertical: 10,
+              borderRadius: 10,
+              
             }}
-          >
-            Email
-          </TextInput>
+            onChange={event => setUsername(event.target.value)}
+            placeholder={'Email'}
+          />
           <TextInput
             clearTextOnFocus={true}
-            style={{ color: "#FFF", borderColor: "#FFF", borderWidth: 1 }}
-          >
-            Password
-          </TextInput>
-          <Button title="Close" onPress={handleShowModal} />
+            style={{ color: "#000", 
+            borderColor: "#000", 
+            borderWidth: 2, 
+            opacity: 1, 
+            padding: 10, 
+            borderRadius: 10 }}
+            placeholder={'Password'}
+            onChange={event => setPassword(event.target.value)}
+            onSubmitEditing={handleOnChange}
+          />
+          
+          </View>
+          <Button title="Sign in" onPress={handleOnChange}/>
         </SafeAreaView>
       </Modal>
       <StatusBar style="auto" />
@@ -65,6 +122,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignContent: "center",
+    backgroundColor: "#fff"
   },
   apple_button: {
     backgroundColor: "#000",
@@ -82,8 +140,7 @@ const styles = StyleSheet.create({
   Icon: {
     paddingHorizontal: 75,
     paddingVertical: 75,
-    marginTop: 15,
-    marginBottom: 10,
+    marginBottom: 30,
     marginHorizontal: "29%",
   },
 });
