@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -13,35 +13,35 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { onChange } from "react-native-reanimated";
 
-
 const Login = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoggedIn, setLogin] = useState(false);
-  const [password, setPassword] = useState("")
-  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
 
   const handleShowModal = () => setModalVisible(!modalVisible);
 
-  // const handleUserLogin = () => {
-  //   // if (password === "") setLogin(true)
-    
-  // };
-  const [inputValues, setInputValues] = useState({
-    username: null, password: null
-  });
-  const handleOnChange = event => {
-    const { name, value } = event.target;
-    setInputValues({[name]: value});
-    if (value === '') setLogin(true)
-   
-    isLoggedIn ? navigation.navigate("Main") :alert('Warning!') 
-    isLoggedIn && handleShowModal()
-  };  
-  
+  const handleUserLogin = () => {
+    if (password !== "") {
+      setLogin(!isLoggedIn);
+      handleShowModal();
+      console.log("password:", password);
+      console.log("isLoggedIn:", isLoggedIn);
+      console.log("Alert:", alert ? true : false);
+    } else {
+      alert("You forgot the password!");
+      console.log("password:", password);
+      console.log("isLoggedIn:", isLoggedIn);
+      console.log("Alert:", alert ? true : false);
+    }
+  };
 
+  useEffect(() => {
+    if (isLoggedIn) navigation.navigate("Main");
+    setLogin(false);
+  }, [isLoggedIn]);
 
   return (
-    
     <View style={styles.container}>
       <Image source={require("../assets/icon.png")} style={styles.Icon} />
       <TouchableOpacity
@@ -57,58 +57,74 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
       <Button title="Sign in with Email" onPress={handleShowModal} />
       <Button title="Forgot Passowrd" />
-      <Modal transparent={true} visible={modalVisible} animationType='slide'>
-        <SafeAreaView style={{ backgroundColor: "#ccc", 
-        height: "50%", 
-        opacity: 0.8, 
-        marginTop: "50%", 
-        width: "95%", 
-        alignSelf: "center", 
-        borderRadius: 32}}>
-        <View>
-          <TouchableOpacity onPress={handleShowModal} style={{color: "#000"}}>
-            <Text style={{fontWeight: "bold", 
-            fontSize: 30, 
-            alignSelf: "flex-end", 
-            marginRight: 20, 
-            marginTop: 20, 
-            position: "relative"}}>X</Text>
-          </TouchableOpacity>
-        </View>
-          <View style={{justifyContent: "flex-start", 
-          flex: 1, 
-          marginTop: 70, 
-          marginHorizontal: 20}}>
-          <TextInput
-            clearTextOnFocus={true}
-            style={{
-              color: "#000",
-              borderColor: "#000",
-              borderWidth: 2,
-              opacity: 1,
-              padding: 10,
-              marginVertical: 10,
-              borderRadius: 10,
-              
-            }}
-            onChange={event => setUsername(event.target.value)}
-            placeholder={'Email'}
-          />
-          <TextInput
-            clearTextOnFocus={true}
-            style={{ color: "#000", 
-            borderColor: "#000", 
-            borderWidth: 2, 
-            opacity: 1, 
-            padding: 10, 
-            borderRadius: 10 }}
-            placeholder={'Password'}
-            onChange={event => setPassword(event.target.value)}
-            onSubmitEditing={handleOnChange}
-          />
-          
+      <Modal transparent={true} visible={modalVisible} animationType="slide">
+        <SafeAreaView
+          style={{
+            backgroundColor: "#ccc",
+            height: "50%",
+            opacity: 0.8,
+            marginTop: "50%",
+            width: "95%",
+            alignSelf: "center",
+            borderRadius: 32,
+          }}
+        >
+          <View>
+            <TouchableOpacity
+              onPress={handleShowModal}
+              style={{ color: "#000" }}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 30,
+                  alignSelf: "flex-end",
+                  marginRight: 20,
+                  marginTop: 20,
+                  position: "relative",
+                }}
+              >
+                X
+              </Text>
+            </TouchableOpacity>
           </View>
-          <Button title="Sign in" onPress={handleOnChange}/>
+          <View
+            style={{
+              justifyContent: "flex-start",
+              flex: 1,
+              marginTop: 70,
+              marginHorizontal: 20,
+            }}
+          >
+            <TextInput
+              clearTextOnFocus={true}
+              style={{
+                color: "#000",
+                borderColor: "#000",
+                borderWidth: 2,
+                opacity: 1,
+                padding: 10,
+                marginVertical: 10,
+                borderRadius: 10,
+              }}
+              onChange={(event) => setUsername(event.target.value)}
+              placeholder={"Email"}
+            />
+            <TextInput
+              clearTextOnFocus={true}
+              style={{
+                color: "#000",
+                borderColor: "#000",
+                borderWidth: 2,
+                opacity: 1,
+                padding: 10,
+                borderRadius: 10,
+              }}
+              placeholder={"Password"}
+              onChange={(text) => this.setState({ text })}
+            />
+          </View>
+          <Button title="Sign in" onPress={handleUserLogin} />
         </SafeAreaView>
       </Modal>
       <StatusBar style="auto" />
@@ -122,7 +138,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignContent: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   apple_button: {
     backgroundColor: "#000",
