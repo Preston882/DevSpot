@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Image, View, TouchableOpacity, StyleSheet } from "react-native";
 import Header from "../components/Header";
+import { LinearGradient } from "expo-linear-gradient";
 
 export const Picture = ({ image }) => (
   <Image
@@ -21,16 +22,34 @@ const BlockButton = ({
   route,
 }) => {
   return (
-    <View style={styles.margin}>
-      <TouchableOpacity onPress={() => navigation.navigate("Page", { id: id })}>
-        <View style={styles.blockButtonHeader}>
+    <LinearGradient
+      colors={[
+        "#00FFFF",
+        "#17C8FF",
+        "#329BFF",
+        "#4C64FF",
+        "#6536FF",
+        "#8000FF",
+      ]}
+      start={{ x: 0.0, y: 1.0 }}
+      end={{ x: 1.0, y: 1.0 }}
+      style={{ margin: 10, borderRadius: 10 }}
+    >
+      <View style={styles.margin}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Page", { id: id })}
+        >
           <Text style={styles.trending}>{trending ? "Trending🔥" : " "}</Text>
-          <Header>{title}</Header>
-          <Picture image={image} />
-        </View>
-        <Text style={styles.Touchable}>{subbody}</Text>
-      </TouchableOpacity>
-    </View>
+
+          <View style={{ flexDirection: "row" }}>
+            <View style={styles.trending2}></View>
+            <Header style={styles.blockButtonHeader}>{title}</Header>
+            <Picture image={image} />
+          </View>
+          <Text style={styles.Touchable}>{subbody}</Text>
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
   );
 };
 
@@ -38,25 +57,31 @@ const styles = StyleSheet.create({
   Touchable: {
     alignItems: "center",
     justifyContent: "center",
+    padding: 5,
+  },
+  trending2: {
+    alignSelf: "flex-start",
   },
   blockButtonHeader: {
-    flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
+    paddingTop: 10,
+    paddingLeft: 5,
   },
   trending: {
     color: "#fc5603",
-    alignSelf: "flex-start",
-    position: "absolute",
+    position: "relative",
     fontWeight: "bold",
     fontSize: 25,
-    marginLeft: 9,
+    alignSelf: "flex-start",
   },
   tinyLogo: {
     width: 50,
     height: 50,
   },
   margin: {
-    margin: 10,
+    margin: 3,
+    backgroundColor: "#fff",
+    borderRadius: 10,
   },
 });
 
