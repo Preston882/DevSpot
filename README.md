@@ -6,7 +6,7 @@ Icon: ![App Icon](/app/assets/icon_copy.png)
 Subtitle: Technical Advancement Through Communication
 
 Screenshots: 
-![Login](/app/assets/Simulator Screen Shot - iPhone SE (2nd generation) - 2020-12-15 at 11.07.38.png)
+![Login](/app/assets/Simulator%20Screen%20Shot%20-%20iPhone%20SE%20(2nd%20generation)%20-%202020-12-15%20at%2011.07.38.png)
 ![Main](/app/assets/Simulator Screen Shot - iPhone SE (2nd generation) - 2020-12-15 at 11.07.42.png)
 ![Page](/app/assets/Simulator Screen Shot - iPhone SE (2nd generation) - 2020-12-15 at 11.07.49.png)
 
