@@ -1,4 +1,4 @@
-# wireframes
+# DevSpot
 App Name: DevSpot
 
 Icon: ![App Icon](/app/assets/icon_copy.png)
