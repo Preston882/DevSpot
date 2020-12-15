@@ -1,7 +1,7 @@
 # wireframes
 App Name: DevSpot
 
-Icon: ![App Icon](/app/assets/icon.png)
+Icon: ![App Icon](/app/assets/icon_copy.png)
 
 Subtitle: Technical Advancement Through Communication
 
