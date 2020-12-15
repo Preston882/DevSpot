@@ -39,7 +39,7 @@ const BlockButton = ({
         <TouchableOpacity
           onPress={() => navigation.navigate("Page", { id: id })}
         >
-          <Text style={styles.trending}>{trending ? "Trending🔥" : " "}</Text>
+          <Text style={styles.trending}>{trending ? "Trending🔥" : ""}</Text>
 
           <View style={{ flexDirection: "row" }}>
             <View style={styles.trending2}></View>

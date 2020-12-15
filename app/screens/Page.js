@@ -10,6 +10,7 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import Header from "../components/Header";
 import DATA from "../utils/Data";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Picture = ({ image }) => (
   <Image
@@ -26,7 +27,7 @@ function Page({ route }) {
   );
   const Title2 = ({}) => <Header>{item.title}</Header>;
   const item = DATA.find((item) => item.id === route.params.id);
-  const [comments, setComments] = useState(["stuffe", "aklsjdf"]);
+  const [comments, setComments] = useState([""]);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ height: "50%" }}>
@@ -34,12 +35,46 @@ function Page({ route }) {
           {item.trending ? <Title1 /> : <Title2 />}
         </Text>
         <Picture image={item.image} />
-        <Text style={{ textAlign: "center", padding: 10 }}>{item.body}</Text>
-
+        <LinearGradient
+          colors={[
+            "#00FFFF",
+            "#17C8FF",
+            "#329BFF",
+            "#4C64FF",
+            "#6536FF",
+            "#8000FF",
+          ]}
+          start={{ x: 0.0, y: 1.0 }}
+          end={{ x: 1.0, y: 1.0 }}
+          style={{ margin: 10, borderRadius: 10 }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              padding: 10,
+              margin: 7,
+              backgroundColor: "#fff",
+              borderRadius: 10,
+            }}
+          >
+            {item.body}
+          </Text>
+        </LinearGradient>
         {/* <Text>
           {comments.map((comment) => comment)}
         </Text> */}
       </ScrollView>
+      <View>
+        <FlatList
+          data={comments}
+          renderItem={({ item }) => (
+            <View>
+              <Text style={{ color: "#000" }}>{item}</Text>
+            </View>
+          )}
+          keyExtractor={(index) => index}
+        />
+      </View>
       <TextInput
         style={{
           height: 40,
@@ -56,19 +91,6 @@ function Page({ route }) {
           setComments(newComments);
         }}
       />
-      <View>
-        <FlatList
-          data={comments}
-          renderItem={({ item }) => (
-            <View>
-              <Text style={{color: "#000" }}>
-                {item}
-              </Text>
-            </View>
-          )}
-          keyExtractor={(index) => index}
-        />
-      </View>
     </View>
   );
 }
